@@ -5,11 +5,18 @@ defineOptions({
   name: 'IndexPage',
 })
 
-// const childUrI = 'https://iframe-child-1.vercel.app'
-const childUrI = 'http://127.0.0.1:3334/'
+const originUrl = import.meta.env.DEV ? 'http://127.0.0.1:3334/' : 'https://iframe-child-gyh.vercel.app/'
+const childUrl = ref(originUrl)
 function refreshPage() {
   window.location.reload()
+  refreshChildPage()
 }
+function refreshChildPage() {
+  childUrl.value = localStorage.getItem('childUrl') || originUrl
+}
+onMounted(() => {
+  refreshChildPage()
+})
 /**
  * serve
  */
@@ -17,18 +24,20 @@ const messageArr = ref<string[]>([])
 const service = WindowChannel.newChannelService(window)
 service.listen('/hello', (value: string) => {
   messageArr.value.push(value)
+  const routerPath = value.split(': ')[1]
+  localStorage.setItem('childUrl', routerPath)
   return `来自服务端消息${new Date().toLocaleTimeString()}: 接收成功`
 })
 </script>
 
 <template>
   <div class="border-4px border-blue-300" p-10>
-    <iframe class="h-300px w-full" :src="childUrI" frameborder="0" />
+    <iframe class="h-300px w-full" :src="childUrl" frameborder="0" />
 
     <div m-3 c-blue-300>
       Parent Iframe
     </div>
-    <button btn @click="refreshPage">
+    <button mb-20px btn @click="refreshPage">
       Refresh page
     </button>
 
