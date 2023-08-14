@@ -1,42 +1,41 @@
 <script setup lang="ts" generic="T extends any, O extends any">
+import { WindowChannel } from '@haiyaotec/window-channel'
+
 defineOptions({
   name: 'IndexPage',
 })
 
-const name = ref('')
-
-const router = useRouter()
-function go() {
-  if (name.value)
-    router.push(`/hi/${encodeURIComponent(name.value)}`)
-}
-
-const childUrI = 'https://iframe-child-1.vercel.app'
+// const childUrI = 'https://iframe-child-1.vercel.app'
+const childUrI = 'http://127.0.0.1:3334/'
 function refreshPage() {
   window.location.reload()
 }
+/**
+ * serve
+ */
+const messageArr = ref<string[]>([])
+const service = WindowChannel.newChannelService(window)
+service.listen('/hello', (value: string) => {
+  messageArr.value.push(value)
+  return `来自服务端消息${new Date().toLocaleTimeString()}: 接收成功`
+})
 </script>
 
 <template>
-  <div class="border-1px" p-10>
+  <div class="border-4px border-blue-300" p-10>
     <iframe class="h-300px w-full" :src="childUrI" frameborder="0" />
 
-    <div m-3>
+    <div m-3 c-blue-300>
       Parent Iframe
     </div>
     <button btn @click="refreshPage">
       Refresh page
     </button>
-    <!-- <TheInput
-      v-model="name"
-      placeholder="What's your name?"
-      autocomplete="false"
-      @keydown.enter="go"
-    />
-    <div>
-      <button class="m-3 text-sm btn" :disabled="!name" @click="go">
-        Go
-      </button>
-    </div> -->
+
+    <ol w-full flex flex-col items-center justify-center gap-10px>
+      <li v-for="item in messageArr" :key="item" class="w-400px border-1px p-4px">
+        {{ item }}
+      </li>
+    </ol>
   </div>
 </template>

@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@antfu/eslint-config': ^0.39.5
+  '@haiyaotec/window-channel': ^1.0.3
   '@iconify-json/carbon': ^1.1.17
   '@types/node': ^20.2.5
   '@unocss/eslint-config': ^0.53.0
@@ -29,6 +30,7 @@ specifiers:
   vue-tsc: ^1.6.5
 
 dependencies:
+  '@haiyaotec/window-channel': 1.0.3
   '@vueuse/core': 10.3.0_vue@3.3.4
   vue: 3.3.4
   vue-router: 4.2.4_vue@3.3.4
@@ -459,6 +461,12 @@ packages:
     resolution: {integrity: sha512-P6omY1zv5MItm93kLM8s2vr1HICJH8v0dvddDhysbIuZ+vcjOHg5Zbkf1mTkcmi2JA9oBG2anOkRnW8WJTS8Og==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
+
+  /@haiyaotec/window-channel/1.0.3:
+    resolution: {integrity: sha512-Xm6eAZOJv5U0GOUzWtYEGyfe4+k6l5SDP0iTqotY9Fvf7oy9EMun68G+xsW6NSu1WvUiX3IFID0c8FDqFj4geQ==}
+    dependencies:
+      uuid: 8.3.2
+    dev: false
 
   /@humanwhocodes/config-array/0.11.10:
     resolution: {integrity: sha512-KVVjQmNUepDVGXNuoRRdmmEjruj0KfiGSbS8LVc12LMsWDQzRXJ0qdhN8L8uUigKpfEHRhlaQFY0ib1tnUbNeQ==}
@@ -5693,6 +5701,11 @@ packages:
   /util-deprecate/1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
     dev: true
+
+  /uuid/8.3.2:
+    resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
+    hasBin: true
+    dev: false
 
   /validate-npm-package-license/3.0.4:
     resolution: {integrity: sha512-DpKm2Ui/xN7/HQKCtpZxoRWBhZ9Z0kqtygG8XCgNQ8ZlDnxuQmWhj566j8fN4Cu3/JmbhsDo7fcAJq4s9h27Ew==}
